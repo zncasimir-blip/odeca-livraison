@@ -1,0 +1,32 @@
+nom: Créer un APK Android
+
+sur:
+ pousseur:
+ branches: [ "principal" ]
+ workflow_dispatch:
+
+emplois:
+ interprète:
+ se déchaîne: Ubuntu-dernier
+
+ cassettes:
+    - nom: Projet de partenariat
+ utilisations: actions/checkout@v3
+
+    - nom: Configurer le JDK
+ utilisations: actions/setup-java@v3
+ avec:
+ distribution: "Témurin"
+ version java: "17"
+
+    - nom: Rendre Gradlew exécutable
+ courir: chmod +x ./gradlew
+
+    - nom: Créer APK
+ courir: . . . . . . . . . . . . . . . . . . . . /gradlew assembleDebug
+
+    - nom: Télécharger APK
+ utilisations: actions/upload-artifact@v3
+ avec:
+ nom: ODECA-APK
+ chemin: application/build/sorties/apk/debug/*.apk
