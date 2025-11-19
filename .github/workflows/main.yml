@@ -19,7 +19,7 @@ jobs:
       with:
         flutter-version: stable
 
-    - name: Ensure flutter and android tools are available
+    - name: Ensure Android SDK packages
       run: |
         flutter --version
         yes | sdkmanager "platform-tools" "platforms;android-33" || true
@@ -28,7 +28,6 @@ jobs:
       working-directory: ./odeca_app
       run: |
         flutter pub get || true
-        # create platform folders (android/ios) if missing
         flutter create .
 
     - name: Build release APK
