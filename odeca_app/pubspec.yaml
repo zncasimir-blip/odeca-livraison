@@ -1,0 +1,30 @@
+
+name: odeca_app
+description: ODECA - Restaurant ordering & delivery app (starter)
+publish_to: 'none'
+version: 0.0.1
+
+environment:
+  sdk: ">=2.18.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  url_launcher: ^6.1.7
+  http: ^0.13.6
+  geolocator: ^9.0.2
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/logo.png
+    - assets/images/logo_header.png
+    - assets/images/mockup1.png
+    - assets/images/mockup2.png

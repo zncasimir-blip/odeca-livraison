@@ -1,0 +1,28 @@
+
+ODECA - Build & Install Instructions (Quick)
+
+1) GitHub automatic build (no Flutter locally):
+ - Create a GitHub repo and push the entire project folder (odeca_project_full contents).
+ - Ensure the Flutter app lives in odeca_app/ at repo root.
+ - On GitHub, go to Actions > Build Android APK, run the workflow or push to main.
+ - After success, download artifact 'odeca-apk' (contains app-release.apk).
+
+2) Local build (optional):
+ - cd odeca_app
+ - flutter pub get
+ - flutter build apk --release
+ - Install: adb install -r build/app/outputs/flutter-apk/app-release.apk
+
+3) Backend (local testing):
+ - cd odeca_backend && npm install
+ - Set env vars: MANAGER_EMAIL, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+ - Start: node server.js
+ - On Android emulator, use http://10.0.2.2:3000/send-order
+
+4) Replacing placeholders:
+ - Replace assets/images/mockup1.png, mockup2.png and assets/images/logo.png with real images.
+ - Update agent USSD codes in lib/src/screens/checkout_screen.dart 'agentCodes' map.
+
+5) Notes:
+ - The app triggers USSD only after the backend confirms email sent.
+ - iOS requires Apple Developer account for native install. For iOS users recommend hosting web version and use 'Add to Home Screen'.
