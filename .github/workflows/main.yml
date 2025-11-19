@@ -1,4 +1,4 @@
-name: Build Android APK (Flutter auto-create android)
+name: Build Android APK (Flutter)
 
 on:
   push:
@@ -8,36 +8,33 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
 
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v4
 
     - name: Setup Flutter
-      uses: subosito/flutter-action@v2
+      uses: joscha/setup-flutter@v1
       with:
-        flutter-version: stable
+        flutter-version: "3.24.0"
 
-    - name: Ensure Android SDK packages
-      run: |
-        flutter --version
-        yes | sdkmanager "platform-tools" "platforms;android-33" || true
+    - name: Flutter version
+      run: flutter --version
 
-    - name: Create Flutter platform folders (if missing)
-      working-directory: ./odeca_app
-      run: |
-        flutter pub get || true
-        flutter create .
+    - name: Get pub dependencies
+      working-directory: odeca_app
+      run: flutter pub get
 
-    - name: Build release APK
-      working-directory: ./odeca_app
-      run: |
-        flutter pub get
-        flutter build apk --release
+    - name: Create Android folders if missing
+      working-directory: odeca_app
+      run: flutter create .
+
+    - name: Build APK (release)
+      working-directory: odeca_app
+      run: flutter build apk --release
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ODECA-APK
+        name: odeca-apk
         path: odeca_app/build/app/outputs/flutter-apk/app-release.apk
